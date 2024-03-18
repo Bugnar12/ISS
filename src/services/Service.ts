@@ -2,7 +2,6 @@ import {Antivirus} from '../models/Antivirus'
 import {antivirusList} from '../components/AntivirusList'
 
 //this array will be used to store the data
-export let antivirusListService: Antivirus[] = [];
 
 /**
  * Adds a new antivirus to the antivirusList array.

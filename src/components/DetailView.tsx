@@ -14,7 +14,6 @@ const DetailView: React.FC<DetailViewProps> = ({ antivirus }) => {
             <h2>{antivirus.name}</h2>
             <p className='antivirus-entity'>Producer: {antivirus.producer}</p>
             <p className='antivirus-entity'>Description: {antivirus.description}</p>
-            <p className='antivirus-entity'>Release date: {antivirus.releaseDate.toDateString()}</p>
             <p className='antivirus-entity'>Multi-platform support: {antivirus.supportMultiPlatform + ''}</p> {/*adding empty string to convert boolean to string implicitly*/}
             <p className='antivirus-entity'>Release date: {antivirus.releaseDate.toDateString()}</p>
         </div>

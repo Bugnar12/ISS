@@ -10,10 +10,9 @@ import {addAntivirus} from "../services/Service";
 const AntivirusPage: React.FC = () => {
     const [selectedAntivirus, setObject] = useState<Antivirus | null>(null);
     const [showForm, setShowForm] = useState(false);
-    const [antivirusList, setAntivirusList] = useState(initialAntivirusList);
+    const [antivirusList, setAntivirusList] = useState(initialAntivirusList)
 
     const handleClickAdd = (antivirus : Antivirus) => {
-        addAntivirus(antivirus);
         setShowForm(true);
         setAntivirusList([...antivirusList, antivirus]);
     };
@@ -39,10 +38,8 @@ const AntivirusPage: React.FC = () => {
             </div>
             <div>
                 <AlertButton onClick={() => setShowForm(true)}>Add Antivirus</AlertButton>
-                {showForm && <AddAntivirusForm onSubmit={handleClickAdd} />}
             </div>
         </>
     )
-}
-
+};
 export default AntivirusPage;

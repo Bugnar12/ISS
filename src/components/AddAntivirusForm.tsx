@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {addAntivirus} from "../services/Service";
+
 import {Antivirus} from "../models/Antivirus";
+import {addAntivirus} from "../services/Service";
 
 interface Props{
     onSubmit: (antivirus: Antivirus) => void;
@@ -16,20 +17,23 @@ const AddAntivirusForm: React.FC<Props>= ({onSubmit}) => {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        onSubmit({id, name, producer, description, supportMultiPlatform, releaseDate : new Date(releaseDate)});
+        const newAntivirus = new Antivirus(id, name, producer, description, supportMultiPlatform, new Date(releaseDate));
+        onSubmit(newAntivirus);
     };
 
     return(
-        <form onSubmit={handleSubmit}>
-            <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Name"/>
-            <input type="text" value={producer} onChange={e => setProducer(e.target.value)} placeholder="Producer"/>
-            <input type="text" value={description} onChange={e => setDescription(e.target.value)}
-                   placeholder="Description"/>
-            <input type="checkbox" checked={supportMultiPlatform}
-                   onChange={e => setSupportMultiPlatform(e.target.checked)}/>Multi-Platform Support
-            <input type="date" value={releaseDate} onChange={e => setReleaseDate(e.target.value)} placeholder="Release Date"/>
-            <input type="submit" value="Submit" />
-        </form>
+        <div>
+            <form onSubmit={handleSubmit}>
+                <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Name"/>
+                <input type="text" value={producer} onChange={e => setProducer(e.target.value)} placeholder="Producer"/>
+                <input type="text" value={description} onChange={e => setDescription(e.target.value)}
+                       placeholder="Description"/>
+                <input type="checkbox" checked={supportMultiPlatform}
+                       onChange={e => setSupportMultiPlatform(e.target.checked)}/>Multi-Platform Support
+                <input type="date" value={releaseDate} onChange={e => setReleaseDate(e.target.value)} placeholder="Release Date"/>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
     )
 }
 
