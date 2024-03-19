@@ -6,6 +6,9 @@ import React, {useState} from "react";
 import AlertButton from "../components/controls/AddButton";
 import AddAntivirusForm from "../components/AddAntivirusForm";
 import {addAntivirus} from "../services/Service";
+import {Link} from "react-router-dom";
+import AddButton from "../components/controls/AddButton";
+import DeleteButton from "../components/controls/DeleteButton";
 
 const AntivirusPage: React.FC = () => {
     const [selectedAntivirus, setObject] = useState<Antivirus | null>(null);
@@ -17,6 +20,12 @@ const AntivirusPage: React.FC = () => {
         setAntivirusList([...antivirusList, antivirus]);
     };
 
+    const handleDelete = () =>
+    {
+        setAntivirusList(antivirusList.filter(antivirus => antivirus !== selectedAntivirus));
+        setObject(null);
+    }
+
     const handleClickEvent = (antivirus: Antivirus) => {
         if (selectedAntivirus && selectedAntivirus.id === antivirus.id) {
             setObject(null);
@@ -26,20 +35,23 @@ const AntivirusPage: React.FC = () => {
     };
 
     return(
-        <>
-            <div className="antivirus-page">
+        <div className="antivirus-page">
+            <div className="button-list-container">
+                <div className = "style-multiple-buttons">
+                    <div className="styled-button">
+                        <Link to="/add" className="style-link">Add Antivirus</Link>
+                    </div>
+                    <DeleteButton antivirus={selectedAntivirus} onDelete={handleDelete} />
+                </div>
                 <div className="list-container">
                     <AntivirusList2 antivirusList={antivirusList} onAntivirusClick={handleClickEvent}
                                     selectedAntivirus={selectedAntivirus}/>
                 </div>
-                <div className="detail-container">
-                    <DetailView antivirus={selectedAntivirus}/>
-                </div>
             </div>
-            <div>
-                <AlertButton onClick={() => setShowForm(true)}>Add Antivirus</AlertButton>
+            <div className="detail-container">
+                <DetailView antivirus={selectedAntivirus}/>
             </div>
-        </>
+        </div>
     )
 };
 export default AntivirusPage;

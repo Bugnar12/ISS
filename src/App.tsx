@@ -4,6 +4,7 @@ import AddAntivirusPage from "./pages/AddAntivirusPage";
 import antivirus from './antivirus.png';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {Link} from "react-router-dom";
+import '../src/components/controls/StyleButton.css';
 
 function App() {
     return (
@@ -18,15 +19,16 @@ function App() {
                     <Routes>
                         <Route path="/" element={
                             <>
-                                <AntivirusPage />
-                                <Link to="/add" className="link-style">Add Antivirus</Link>
+                                <div className="button-list">
+                                    <AntivirusPage/>
+                                </div>
                             </>
-                        } />
+                        }/>
                         <Route path="/add" element={
                             <>
-                                <AddAntivirusPage />
-                                <div className="link-container">
-                                    <Link to="/">Master-Detail</Link>
+                                <AddAntivirusPage/>
+                                <div>
+                                    <Link to="/" className="styled-button">Master-Detail</Link>
                                 </div>
                             </>
                         } />

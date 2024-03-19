@@ -1,0 +1,44 @@
+.styled-button{
+    display: inline;
+    padding: 0.3em 2em;
+    margin: 0 0.6em 0.6em 0;
+    height: 29px;
+    width: 180px;
+    border-radius: 2em;
+    border: 2px solid black;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    color: #ffffff;
+    background-color: #4eb5f1;
+    text-align: center;
+    align-self: center;
+    align-content: center;
+}
+
+.styled-button:hover{
+    background-color: #4095c6;
+    cursor: pointer;
+}
+
+@media all and (max-width: 30em){
+    styled-button{
+        display: block;
+        margin: 0.2em auto;
+    }
+}
+
+.style-link{
+    padding: 0.2em 0.6em;
+    margin: 0 0.2em 0.2em 0;
+    border-radius: 1em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 200;
+    color: #ffffff;
+    text-align: center;
+}
+
+.style-link:hover{
+    background-color: #4095c6;
+}

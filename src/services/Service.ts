@@ -17,3 +17,18 @@ export function addAntivirus(antivirus: Antivirus)
     antivirusList.push(antivirus);
     console.log(addedID);
 }
+
+
+/*Deletes an antivirus from the in-memory array.
+*Search for the id and splice the list where the id is found
+* @param {Antivirus} antivirus
+* effect: an item is deleted from the list if it is actually found in there
+* */
+export function deleteAntivirus(antivirus: Antivirus)
+{
+    const index = antivirusList.findIndex(e => e.id === antivirus.id);
+    if(index !== -1)
+    {
+        antivirusList.splice(index, 1);
+    }
+}

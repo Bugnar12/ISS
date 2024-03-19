@@ -10,7 +10,7 @@ const DetailView: React.FC<DetailViewProps> = ({ antivirus }) => {
     if (!antivirus) return null;
 
     return (
-        <div className=''>
+        <div className='detail-view'>
             <h2>{antivirus.name}</h2>
             <p className='antivirus-entity'>Producer: {antivirus.producer}</p>
             <p className='antivirus-entity'>Description: {antivirus.description}</p>
