@@ -1,7 +1,5 @@
 import {Antivirus} from "../models/Antivirus";
-import React from "react";
 import '../App.css'
-import {Component} from "react";
 
 export const antivirusList : Antivirus[] = [
     new Antivirus(1, 'Kaspersky', 'Kaspersky Lab', 'Kaspersky is a well-known antivirus software', true, new Date('2020-01-01')),
@@ -12,19 +10,3 @@ export const antivirusList : Antivirus[] = [
     new Antivirus(6, 'ESET', 'ESET', 'ESET is an antivirus software', true, new Date('2000-01-01')),
     new Antivirus(7, 'SuperAntiSpyware', 'SuperAntiSpyware', 'SuperAntiSpyware is an antivirus software', false, new Date('2000-01-01')),
 ]
-export default class AntivirusListClass extends Component{
-    render()
-    {
-        const listItems = antivirusList.map((antivirus) =>
-            <div key={antivirus.id}>
-                <li className='antivirus-name'>{antivirus.name}</li>
-            </div>
-        );
-
-        return (
-            <div id = "designAntivirus">
-                <ul>{listItems}</ul>
-            </div>
-        )
-    }
-}

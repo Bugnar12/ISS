@@ -1,0 +1,16 @@
+.add-input-style {
+    width: 40%; /* Adjust this value as needed */
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.add-input-style:focus {
+    border-color: #4CAF50;
+    background-color: #e9f6ec;
+}

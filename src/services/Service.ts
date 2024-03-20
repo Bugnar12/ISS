@@ -1,5 +1,5 @@
 import {Antivirus} from '../models/Antivirus'
-import {antivirusList} from '../components/AntivirusList'
+import {antivirusList} from "../components/AntivirusList";
 
 //this array will be used to store the data
 
@@ -31,4 +31,17 @@ export function deleteAntivirus(antivirus: Antivirus)
     {
         antivirusList.splice(index, 1);
     }
+}
+
+export function updateAntivirus(antivirus: Antivirus)
+{
+    const index = antivirusList.findIndex(e => e.id === antivirus.id);
+    if(index !== -1)
+    {
+        antivirusList[index] = antivirus;
+    }
+}
+export function getAntivirusList()
+{
+    return antivirusList;
 }

@@ -1,30 +1,50 @@
+import React, { useState, useEffect } from 'react';
+import Modal from 'react-modal';
 import AntivirusList2 from "../components/AntivirusList2";
 import DetailView from "../components/DetailView";
-import {antivirusList as initialAntivirusList} from "../components/AntivirusList";
 import {Antivirus} from "../models/Antivirus";
-import React, {useState} from "react";
-import AlertButton from "../components/controls/AddButton";
-import AddAntivirusForm from "../components/AddAntivirusForm";
-import {addAntivirus} from "../services/Service";
 import {Link} from "react-router-dom";
-import AddButton from "../components/controls/AddButton";
 import DeleteButton from "../components/controls/DeleteButton";
+import '../components/controls/ReactModal.css';
+import {deleteAntivirus, updateAntivirus, getAntivirusList} from "../services/Service";
+import UpdateButton from "../components/controls/UpdateButton";
+
+Modal.setAppElement('#root'); // This line is needed for accessibility reasons
 
 const AntivirusPage: React.FC = () => {
     const [selectedAntivirus, setObject] = useState<Antivirus | null>(null);
-    const [showForm, setShowForm] = useState(false);
-    const [antivirusList, setAntivirusList] = useState(initialAntivirusList)
+    const [antivirusList, setAntivirusList] = useState<Antivirus[]>([]);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    const handleClickAdd = (antivirus : Antivirus) => {
-        setShowForm(true);
-        setAntivirusList([...antivirusList, antivirus]);
+    useEffect(() => {
+        setAntivirusList(getAntivirusList());
+    }, []);
+
+    const handleDelete = () => {
+        setModalIsOpen(true);
     };
 
-    const handleDelete = () =>
-    {
-        setAntivirusList(antivirusList.filter(antivirus => antivirus !== selectedAntivirus));
-        setObject(null);
-    }
+    const handleConfirmDelete = () => {
+        //delete + filter to see which id has the antivirus selected + set the object to null
+        if (selectedAntivirus) {
+            deleteAntivirus(selectedAntivirus);
+            setAntivirusList(antivirusList.filter(antivirus => antivirus !== selectedAntivirus));
+            setObject(null);
+        }
+        setModalIsOpen(false);
+    };
+
+    const handleCancelDelete = () => {
+        setModalIsOpen(false);
+    };
+
+    const handleUpdate = () => {
+        if (selectedAntivirus) {
+            updateAntivirus(selectedAntivirus);
+            setObject(selectedAntivirus);
+            setAntivirusList(getAntivirusList());
+        }
+    };
 
     const handleClickEvent = (antivirus: Antivirus) => {
         if (selectedAntivirus && selectedAntivirus.id === antivirus.id) {
@@ -42,6 +62,9 @@ const AntivirusPage: React.FC = () => {
                         <Link to="/add" className="style-link">Add Antivirus</Link>
                     </div>
                     <DeleteButton antivirus={selectedAntivirus} onDelete={handleDelete} />
+                    <div className ="styled-button">
+                        <Link to={`/update/${selectedAntivirus?.id}`}>Update Antivirus</Link>
+                    </div>
                 </div>
                 <div className="list-container">
                     <AntivirusList2 antivirusList={antivirusList} onAntivirusClick={handleClickEvent}
@@ -51,6 +74,16 @@ const AntivirusPage: React.FC = () => {
             <div className="detail-container">
                 <DetailView antivirus={selectedAntivirus}/>
             </div>
+            <Modal className="react-modal"
+                   isOpen={modalIsOpen}
+                   onRequestClose={handleCancelDelete}
+                   contentLabel="Delete Confirmation"
+            >
+                <h2>Confirm Delete</h2>
+                <p>Are you sure you want to delete this antivirus?</p>
+                <button onClick={handleConfirmDelete}>Yes</button>
+                <button onClick={handleCancelDelete}>No</button>
+            </Modal>
         </div>
     )
 };

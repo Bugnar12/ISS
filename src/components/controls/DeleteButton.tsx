@@ -11,7 +11,6 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({antivirus, onDelete}) => {
     const handleDelete = () =>
     {
         if(antivirus) {
-            deleteAntivirus(antivirus);
             onDelete();
         }
     };
