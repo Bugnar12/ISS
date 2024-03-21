@@ -1,0 +1,219 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render AddAntivirusPage correctly 1`] = `
+<div>
+  <div>
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        className="add-input-style"
+        onChange={[Function]}
+        placeholder="Name"
+        type="text"
+        value=""
+      />
+      <input
+        className="add-input-style"
+        onChange={[Function]}
+        placeholder="Producer"
+        type="text"
+        value=""
+      />
+      <input
+        className="add-input-style"
+        onChange={[Function]}
+        placeholder="Description"
+        type="text"
+        value=""
+      />
+      <input
+        checked={false}
+        className="add-input-style"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      Multi-Platform Support
+      <input
+        className="add-input-style"
+        onChange={[Function]}
+        placeholder="Release Date"
+        type="date"
+        value=""
+      />
+      <input
+        type="submit"
+        value="Submit"
+      />
+    </form>
+  </div>
+</div>
+`;
+
+exports[`should render AntivirusPage correctly 1`] = `
+<div
+  className="antivirus-page"
+>
+  <div
+    className="button-list-container"
+  >
+    <div
+      className="style-multiple-buttons"
+    >
+      <div
+        className="styled-button"
+      >
+        <a
+          className="style-link"
+          href="/add"
+          onClick={[Function]}
+        >
+          Add Antivirus
+        </a>
+      </div>
+      <button
+        className="styled-button"
+        onClick={[Function]}
+      >
+        Delete Antivirus
+      </button>
+      <div
+        className="styled-button"
+      >
+        <a
+          className="style-link"
+          href="/update/undefined"
+          onClick={[Function]}
+        >
+          Update Antivirus
+        </a>
+      </div>
+    </div>
+    <div
+      className="list-container"
+    >
+      <ul
+        className="style-list"
+      />
+    </div>
+  </div>
+  <div
+    className="detail-container"
+  />
+</div>
+`;
+
+exports[`should render AntivirusPage correctly for delete operation 1`] = `
+<div
+  className="antivirus-page"
+>
+  <div
+    className="button-list-container"
+  >
+    <div
+      className="style-multiple-buttons"
+    >
+      <div
+        className="styled-button"
+      >
+        <a
+          className="style-link"
+          href="/add"
+          onClick={[Function]}
+        >
+          Add Antivirus
+        </a>
+      </div>
+      <button
+        className="styled-button"
+        onClick={[Function]}
+      >
+        Delete Antivirus
+      </button>
+      <div
+        className="styled-button"
+      >
+        <a
+          className="style-link"
+          href="/update/undefined"
+          onClick={[Function]}
+        >
+          Update Antivirus
+        </a>
+      </div>
+    </div>
+    <div
+      className="list-container"
+    >
+      <ul
+        className="style-list"
+      />
+    </div>
+  </div>
+  <div
+    className="detail-container"
+  />
+</div>
+`;
+
+exports[`should render UpdateAntivirusPage correctly 1`] = `
+<div>
+  <div>
+    <form
+      onSubmit={[Function]}
+    >
+      <label>
+        Antivirus name:
+      </label>
+      <input
+        className="add-input-style"
+        onChange={[Function]}
+        placeholder="Name"
+        type="text"
+        value=""
+      />
+      <label>
+        Producer
+      </label>
+      <input
+        className="add-input-style"
+        onChange={[Function]}
+        placeholder="Producer"
+        type="text"
+        value=""
+      />
+      <label>
+        Description
+      </label>
+      <input
+        className="add-input-style"
+        onChange={[Function]}
+        placeholder="Description"
+        type="text"
+        value=""
+      />
+      <input
+        checked={false}
+        className="add-input-style"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      Multi-Platform Support
+      <input
+        className="add-input-style"
+        onChange={[Function]}
+        placeholder="Release Date"
+        type="date"
+        value=""
+      />
+      <label>
+        Release Date
+      </label>
+      <input
+        type="submit"
+        value="Submit"
+      />
+    </form>
+  </div>
+</div>
+`;

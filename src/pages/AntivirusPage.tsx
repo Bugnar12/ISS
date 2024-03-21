@@ -9,7 +9,7 @@ import '../components/controls/ReactModal.css';
 import {deleteAntivirus, updateAntivirus, getAntivirusList} from "../services/Service";
 import UpdateButton from "../components/controls/UpdateButton";
 
-Modal.setAppElement('#root'); // This line is needed for accessibility reasons
+//Modal.setAppElement('#root'); // This line is needed for accessibility reasons
 
 const AntivirusPage: React.FC = () => {
     const [selectedAntivirus, setObject] = useState<Antivirus | null>(null);
@@ -38,14 +38,6 @@ const AntivirusPage: React.FC = () => {
         setModalIsOpen(false);
     };
 
-    const handleUpdate = () => {
-        if (selectedAntivirus) {
-            updateAntivirus(selectedAntivirus);
-            setObject(selectedAntivirus);
-            setAntivirusList(getAntivirusList());
-        }
-    };
-
     const handleClickEvent = (antivirus: Antivirus) => {
         if (selectedAntivirus && selectedAntivirus.id === antivirus.id) {
             setObject(null);
@@ -63,7 +55,7 @@ const AntivirusPage: React.FC = () => {
                     </div>
                     <DeleteButton antivirus={selectedAntivirus} onDelete={handleDelete} />
                     <div className ="styled-button">
-                        <Link to={`/update/${selectedAntivirus?.id}`}>Update Antivirus</Link>
+                        <Link to={`/update/${selectedAntivirus?.id}`} className={"style-link"}>Update Antivirus</Link>
                     </div>
                 </div>
                 <div className="list-container">

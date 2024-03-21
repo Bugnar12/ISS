@@ -46,9 +46,11 @@ const UpdateAntivirusForm: React.FC<Props>= ({onClick, antivirus}) => {
                 <input type="text" className="add-input-style" value={name} onChange={e => setName(e.target.value)} placeholder="Name"/>
                 <label>Producer</label>
                 <input type="text" className="add-input-style" value={producer} onChange={e => setProducer(e.target.value)} placeholder="Producer"/>
+                <label>Description</label>
                 <input type="text" className="add-input-style" value={description} onChange={e => setDescription(e.target.value)} placeholder="Description"/>
                 <input type="checkbox" className="add-input-style" checked={supportMultiPlatform} onChange={e => setSupportMultiPlatform(e.target.checked)}/>Multi-Platform Support
                 <input type="date" className="add-input-style" value={releaseDate} onChange={e => setReleaseDate(e.target.value)} placeholder="Release Date"/>
+                <label>Release Date</label>
                 <input type="submit" value="Submit"/>
             </form>
         </div>

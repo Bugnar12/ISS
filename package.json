@@ -45,6 +45,8 @@
   },
   "devDependencies": {
     "@types/react-modal": "^3.16.3",
-    "jest": "^27.5.1"
+    "@types/react-test-renderer": "^18.0.7",
+    "jest": "^27.5.1",
+    "react-test-renderer": "^18.2.0"
   }
 }
