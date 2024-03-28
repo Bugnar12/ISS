@@ -19,8 +19,6 @@ const UpdateAntivirusPage: React.FC = () => {
             const antivirusToUpdate = getAntivirusList().find(antivirus => antivirus.id === antivirusID);
             setAntivirus(antivirusToUpdate ? antivirusToUpdate : null);
         } else {
-            // Handle the case when antivirusIDString is undefined
-            // For example, you can redirect the user or show an error message
             navigate('/');
         }
     }, [antivirusIDString, navigate]);

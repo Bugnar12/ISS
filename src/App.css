@@ -1,3 +1,13 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('background-page.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
 .AntivirusList {
     margin-top: 20px;
     display: flex;
@@ -53,7 +63,7 @@
 .antivirus-page {
   display: grid;
   grid-template-columns: 3fr 2fr;
-  grid-template-rows: 1fr;
+  grid-template-rows: 1fr 1fr;
   justify-content: center;
   gap: 20px;
 }
@@ -65,6 +75,7 @@
   margin-left: 70px;
   margin-right: 70px;
   border: 3px solid moccasin; /* Add a border */
+  background-image: url('background-page.jpg');
   border-radius: 5px; /* Add border radius for rounded corners */
 }
 
@@ -202,7 +213,7 @@ form input[type="submit"]:hover {
   padding: 20px;
   border: 5px solid #f0f0f0;
   border-radius: 20px;
-  height: auto;
+  height: 400px;
   width: 500px; /* Set a fixed width */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
@@ -218,7 +229,39 @@ form input[type="submit"]:hover {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-image: url(background-page.jpg);
-    background-size: cover;
-  background-repeat: no-repeat;
+}
+
+
+.antivirus-chart{
+  border: 2px solid black;
+  height: 370px;
+  width: 400px;
+  border-radius: 20px
+}
+.text-title {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3em;
+  color: #000;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background-color: #ff6347;
+  border-radius: 50%;
+  transition: background-color 2s;
+}
+
+.wrapper-detail-chart{
+    postion: relative;
+    margin-top: 75px;
 }

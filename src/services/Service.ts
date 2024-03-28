@@ -41,7 +41,15 @@ export function updateAntivirus(antivirus: Antivirus)
         antivirusList[index] = antivirus;
     }
 }
-export function getAntivirusList()
+
+
+export function getAntivirusListPaging(page: number, itemsPerPage: number)
 {
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    return antivirusList;
+}
+
+export function getAntivirusList(){
     return antivirusList;
 }

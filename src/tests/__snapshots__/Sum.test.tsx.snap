@@ -88,6 +88,14 @@ exports[`should render AntivirusPage correctly 1`] = `
           Update Antivirus
         </a>
       </div>
+      <div>
+        <button
+          className="styled-button"
+          onClick={[Function]}
+        >
+          Sorting
+        </button>
+      </div>
     </div>
     <div
       className="list-container"
@@ -140,6 +148,14 @@ exports[`should render AntivirusPage correctly for delete operation 1`] = `
         >
           Update Antivirus
         </a>
+      </div>
+      <div>
+        <button
+          className="styled-button"
+          onClick={[Function]}
+        >
+          Sorting
+        </button>
       </div>
     </div>
     <div
