@@ -7,13 +7,14 @@
     border-radius: 2em;
     border: 2px solid black;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-family: Ariel, sans-serif;
     font-size: 15px;
-    color: #ffffff;
-    background-color: #4eb5f1;
+    color: black;
+    background-color: #aeb5f6;
     text-align: center;
     align-self: center;
-    align-content: center;
+    transition: background-color 0.3s;
 }
 
 .styled-button:hover{
@@ -34,8 +35,9 @@
     border-radius: 1em;
     box-sizing: border-box;
     text-decoration: none;
-    font-weight: 200;
-    color: #ffffff;
+    font-weight: bold;
+    color: black;
+    font-family: Ariel, sans-serif;
     text-align: center;
 }
 

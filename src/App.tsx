@@ -5,6 +5,7 @@ import antivirus from './antivirus.png';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {Link} from "react-router-dom";
 import '../src/components/controls/StyleButton.css';
+import '../src/App.css';
 import UpdateAntivirusPage from "./pages/UpdateAntivirusPage";
 
 function App() {

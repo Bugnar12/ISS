@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import {Antivirus} from "../models/Antivirus";
-import {addAntivirus} from "../services/Service";
+import {addAntivirus} from "../api/API_Requests";
 import "../components/controls/StyleInput.css";
 
 interface Props{
@@ -18,8 +18,31 @@ const AddAntivirusForm: React.FC<Props>= ({onSubmit}) => {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
+        if (!name || !producer || !description || !releaseDate) {
+            alert('Please fill out all fields');
+            return;
+        }
         const newAntivirus = new Antivirus(id, name, producer, description, supportMultiPlatform, new Date(releaseDate));
-        onSubmit(newAntivirus);
+        console.log('New antivirus object:', newAntivirus); // Check the newAntivirus object
+
+        // Create a new plain object with the same properties as newAntivirus but without underscore prefixes
+        const newAntivirusPlainObject = {
+            id: newAntivirus.id,
+            name: newAntivirus.name,
+            producer: newAntivirus.producer,
+            description: newAntivirus.description,
+            supportMultiPlatform: newAntivirus.supportMultiPlatform,
+            releaseDate: newAntivirus.releaseDate
+        };
+
+        addAntivirus(newAntivirusPlainObject)
+            .then(response => {
+                console.log('Response:', response); // Log the entire response
+                onSubmit(newAntivirus);
+            })
+            .catch(error => {
+                console.error('Error adding antivirus: ', error);
+            });
     };
 
     return(

@@ -1,5 +1,3 @@
-//make antivirus model
-
 export class Antivirus{
     private _id: number;
     private _name: string;

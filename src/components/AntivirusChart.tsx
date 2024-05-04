@@ -1,5 +1,7 @@
+import React, { useEffect, useState } from 'react';
 import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
-import { antivirusList } from "./AntivirusList";
+import { getAntivirusList } from '../api/API_Requests';
+import {Antivirus} from "../models/Antivirus";
 
 const sizing = {
     margin: { left: 5 },
@@ -8,12 +10,19 @@ const sizing = {
 };
 
 export default function AntivirusChart() {
-    const data = antivirusList.map(antivirus => {
-        return {
-            label: antivirus.name,
-            value: antivirus.releaseDate.getFullYear() > 2015 ? 1 : 0
-        }
-    });
+    const [antivirusData, setAntivirusData] = useState([]);
+
+    useEffect(() => {
+        getAntivirusList().then(response => {
+            const data = response.data.map((antivirus : Antivirus) => {
+                return {
+                    label: antivirus.name,
+                    value: new Date(antivirus.releaseDate).getFullYear() > 2015 ? 1 : 0
+                };
+            });
+            setAntivirusData(data);
+        });
+    }, []);
 
     return (
         <div className="chart-container" style={{ width: 400, height: 400, }}>
@@ -21,23 +30,23 @@ export default function AntivirusChart() {
                 series={[
                     {
                         outerRadius: 90,
-                        data,
+                        data: antivirusData,
                     },
                 ]}
-            sx={{
-                [`& .${pieArcLabelClasses.root}`]:{
-                    fill: 'white',
-                    fonSize: 14,
-                },
-            }}
-            slotProps={{
-                legend: {
-                    //hide the legend
-                    hidden: true,
-            },
-            }}
-            {...sizing}
-        />
+                sx={{
+                    [`& .${pieArcLabelClasses.root}`]:{
+                        fill: 'white',
+                        fontSize: 14,
+                    },
+                }}
+                slotProps={{
+                    legend: {
+                        //hide the legend
+                        hidden: true,
+                    },
+                }}
+                {...sizing}
+            />
         </div>
     );
 }

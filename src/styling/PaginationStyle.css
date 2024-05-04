@@ -1,0 +1,32 @@
+.select-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pagination-container label {
+    font-size: 1.2em;
+    color: #333;
+    margin-right: 10px;
+}
+
+.select-items-per-page {
+    padding: 5px 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.select-items-per-page:hover {
+    background-color: #e8e8e8;
+    cursor: pointer;
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {Antivirus} from "../models/Antivirus";
-import {updateAntivirus, getAntivirusList} from "../services/Service";
+import {getAntivirusById} from "../api/API_Requests";
 import UpdateAntivirusForm from "../components/UpdateAntivirusForm";
 
 interface RouteParams {
@@ -16,21 +16,22 @@ const UpdateAntivirusPage: React.FC = () => {
     useEffect(() => {
         if (antivirusIDString) {
             const antivirusID = parseInt(antivirusIDString);
-            const antivirusToUpdate = getAntivirusList().find(antivirus => antivirus.id === antivirusID);
-            setAntivirus(antivirusToUpdate ? antivirusToUpdate : null);
+            getAntivirusById(antivirusID)
+                .then((response) => {
+                    setAntivirus(response.data);
+                })
+                .catch((error) => {
+                    console.error('Error fetching data: ', error);
+                    navigate('/');
+                });
         } else {
             navigate('/');
         }
     }, [antivirusIDString, navigate]);
 
-    const handleUpdate = (antivirus: Antivirus) => {
-        updateAntivirus(antivirus);
-        navigate('/');
-    };
-
     return(
         <div>
-            <UpdateAntivirusForm onClick={handleUpdate} antivirus={antivirus}/>
+            <UpdateAntivirusForm antivirus={antivirus}/>
         </div>
     )
 }
