@@ -9,18 +9,25 @@ const sizing = {
     height: 350,
 };
 
+interface AntivirusData {
+    label: string;
+    value: number;
+}
+
 export default function AntivirusChart() {
-    const [antivirusData, setAntivirusData] = useState([]);
+    const [antivirusData, setAntivirusData] = useState<AntivirusData[]>([]);
 
     useEffect(() => {
-        getAntivirusList().then(response => {
-            const data = response.data.map((antivirus : Antivirus) => {
-                return {
-                    label: antivirus.name,
-                    value: new Date(antivirus.releaseDate).getFullYear() > 2015 ? 1 : 0
-                };
-            });
-            setAntivirusData(data);
+        getAntivirusList().then(data => {
+            if (Array.isArray(data)) {
+                const mappedData = data.map((antivirus : Antivirus) => {
+                    return {
+                        label: antivirus.name,
+                        value: new Date(antivirus.releaseDate).getFullYear() > 2015 ? 1 : 0
+                    };
+                });
+                setAntivirusData(mappedData);
+            }
         });
     }, []);
 

@@ -4,6 +4,7 @@ import React from 'react';
 import { Antivirus } from '../models/Antivirus';
 import AddAntivirusForm from '../components/AddAntivirusForm';
 import {useNavigate} from "react-router-dom";
+import { Chart } from 'chart.js';
 
 const AddAntivirusPage: React.FC = () => {
     const navigate = useNavigate();

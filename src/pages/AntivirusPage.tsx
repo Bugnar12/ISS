@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import DeleteButton from "../components/controls/DeleteButton";
 import '../components/controls/ReactModal.css';
 import AntivirusChart from "../components/AntivirusChart";
-import {getAntivirusList, getAntivirusById, deleteAntivirus} from "../api/API_Requests";
+import {getAntivirusList, getAntivirusById, deleteAntivirus, syncDataWithServer, checkServerStatus} from "../api/API_Requests";
 import AntivirusList2 from "../components/AntivirusList2";
 import SockJS from "sockjs-client";
 import {CompatClient, Message, Stomp} from "@stomp/stompjs";
@@ -15,8 +15,8 @@ import Pagination from '../components/Pagination';
 
 Modal.setAppElement('#root');
 
-
 const AntivirusPage: React.FC = () => {
+
     const [selectedAntivirus, setObject] = useState<Antivirus | null>(null);
     const [antivirusList, setAntivirusList] = useState<Antivirus[]>([]);
 
@@ -31,19 +31,28 @@ const AntivirusPage: React.FC = () => {
 
     const [stompClient, setStompClient] = useState<CompatClient | null>(null);
     const [isOnline, setIsOnline] = useState(navigator.onLine);
+    const [wasOnline, setWasOnline] = useState(true);
 
     useEffect(() => {
-        const updateOnlineStatus = () => {
-            setIsOnline(navigator.onLine);
+        const updateOnlineStatus = async () => {
+            console.log('updateOnlineStatus called!');
+            const serverIsOnline = await checkServerStatus();
+            if(serverIsOnline)
+            {
+                console.log("The server is back online!");
+                syncDataWithServer();
+            }
         }
         window.addEventListener('online', updateOnlineStatus);
         window.addEventListener('offline', updateOnlineStatus)
+
+        updateOnlineStatus();
 
         return () => {
             window.removeEventListener('online', updateOnlineStatus)
             window.removeEventListener('offline', updateOnlineStatus)
         }
-        }, []);
+    }, []);
 
 
     useEffect(() => {
@@ -93,18 +102,22 @@ const AntivirusPage: React.FC = () => {
             setModalPaginationIsOpen(true);
     }
 
-    const paginatedAntivirusList = antivirusList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const paginatedAntivirusList = antivirusList ? antivirusList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage) : [];
 
     const refreshData = () => {
         getAntivirusList()
             .then((response) => {
-                setAntivirusList(response.data);
-                setServerErrorModal(false); //means the server is working OK
+                if ('data' in response) {
+                    setAntivirusList(response.data);
+                    setServerErrorModal(false);
+                } else {
+
+                    setAntivirusList(response);
+                }
             })
             .catch((error) => {
-                console.error("Error fetching antivirus list", error);
+                console.error('Error fetching data: ', error);
                 setServerErrorModal(true); //we open a modal to address the unsuccessful fetching of data
-
             })
     }
 
@@ -224,6 +237,7 @@ const AntivirusPage: React.FC = () => {
             >
                 <h2>No Internet Connection</h2>
                 <p>You are currently offline. Please check your internet connection.</p>
+                <button onClick={() => setIsOnline(true)}>Proceed</button>
             </Modal>
         </div>
     )

@@ -22,22 +22,21 @@ const AddAntivirusForm: React.FC<Props>= ({onSubmit}) => {
             alert('Please fill out all fields');
             return;
         }
-        const newAntivirus = new Antivirus(id, name, producer, description, supportMultiPlatform, new Date(releaseDate));
-        console.log('New antivirus object:', newAntivirus); // Check the newAntivirus object
+        const newId = Date.now();
+        const newAntivirus = new Antivirus(newId, name, producer, description, supportMultiPlatform, new Date(releaseDate));
+        console.log(newAntivirus);
 
-        // Create a new plain object with the same properties as newAntivirus but without underscore prefixes
-        const newAntivirusPlainObject = {
-            id: newAntivirus.id,
-            name: newAntivirus.name,
-            producer: newAntivirus.producer,
-            description: newAntivirus.description,
-            supportMultiPlatform: newAntivirus.supportMultiPlatform,
-            releaseDate: newAntivirus.releaseDate
-        };
+        const antivirusPlainObject = {
+            id: newId,
+            name: name,
+            producer: producer,
+            description: description,
+            supportMultiPlatform: supportMultiPlatform,
+            releaseDate: new Date(releaseDate)
+        }
 
-        addAntivirus(newAntivirusPlainObject)
-            .then(response => {
-                console.log('Response:', response); // Log the entire response
+        addAntivirus(antivirusPlainObject)
+            .then(antivirus => {
                 onSubmit(newAntivirus);
             })
             .catch(error => {
