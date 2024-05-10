@@ -19,3 +19,9 @@
     margin: 5px 0;
     color: #666;
 }
+
+.customer-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

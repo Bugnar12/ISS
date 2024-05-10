@@ -1,0 +1,45 @@
+.customer-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    overflow: hidden; /* Add this line to remove the sliding bar */
+}
+
+.customer-count {
+    font-size: 30px; /* Increase the font size */
+    font-family: Garamond, sans-serif; /* Change the font family */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 1px #000000; /* Add a text shadow for a nicer look */
+}
+
+.customer-card {
+    width: 80%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+}
+
+.customer-card h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.customer-card p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.highlighted {
+    color: #ffffff; /* Change the font color to white */
+    background-color: #ff0000; /* Add a background color */
+    padding: 2px 4px; /* Add some padding around the text */
+}
