@@ -8,6 +8,7 @@ import '../src/components/controls/StyleButton.css';
 import '../src/App.css';
 import UpdateAntivirusPage from "./pages/UpdateAntivirusPage";
 import './utils/IndexedDBManager'
+import { CustomerPage } from './pages/CustomerPage';
 
 function App() {
     return (
@@ -43,6 +44,7 @@ function App() {
                                 </div>
                             </>
                         } />
+                        <Route path="/antivirus/:antivirusId/customers" element={<CustomerPage />} />
                     </Routes>
                 </div>
             </div>
