@@ -1,10 +1,24 @@
 .customer-list {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
-    overflow: hidden; /* Add this line to remove the sliding bar */
+
+    width: 100%;
+}
+
+.customer-list::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?size=626&ext=jpg&ga=GA1.1.1269040533.1711656000&semt=sph');
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
 }
 
 .customer-count {
@@ -17,13 +31,14 @@
 }
 
 .customer-card {
-    width: 80%;
+    width: 90%;
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 20px;
     margin: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
     background-color: #fff;
+    overflow: hidden;
 }
 
 .customer-card h2 {
@@ -33,9 +48,30 @@
     color: #333;
 }
 
+/*
 .customer-card p {
-    margin: 5px 0;
+    margin: 3px 0;
+    padding: 0;
     color: #666;
+}
+*/
+
+.infinite-scroll-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    .infinite-scroll-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .infinite-scroll-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .highlighted {

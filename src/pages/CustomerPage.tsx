@@ -54,8 +54,9 @@ export const CustomerPage: React.FC = () => {
             <InfiniteScroll
                 dataLength={customers.length}
                 next={fetchCustomers}
-                hasMore={customersSum > customers.length}
-                loader={<h3>Loading page...</h3>}>
+                hasMore={customers.length < customerCount}
+                loader={<h3>Loading page...</h3>}
+                className = 'infinite-scroll-grid'>
                 {customers.map((customer: Customer) => (
                     <div key={customer.getId()} className='customer-card'>
                         <h2>{customer.getFullName()}</h2>
