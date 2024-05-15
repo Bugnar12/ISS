@@ -9,8 +9,20 @@ import '../src/App.css';
 import UpdateAntivirusPage from "./pages/UpdateAntivirusPage";
 import './utils/IndexedDBManager'
 import { CustomerPage } from './pages/CustomerPage';
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
-function App() {
+const App: React.FC = () => {
+    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+    if(!isLoggedIn){
+        return(
+            <div>
+                <Login onLogin={() => setIsLoggedIn(true)} />
+                <Register/>
+            </div>
+        )
+    }
     return (
         <Router>
             <div className="App">

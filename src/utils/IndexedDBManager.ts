@@ -6,14 +6,18 @@ const dbPromise = openDB('lw-database', 1, {
     },
 });
 
-export async function addToDB(key: number, val: any) {
+export async function addToDB(key: string, val: any) {
     const db = await dbPromise;
     return db.put('offlineData', val, key);
 }
 
-export async function getFromDB() {
+export async function getFromDB(key?: string) {
     const db = await dbPromise;
-    return db.getAll('offlineData');
+    if (key) {
+        return db.get('offlineData', key);
+    } else {
+        return db.getAll('offlineData');
+    }
 }
 
 export async function updateInDB(key: number, val: any) {

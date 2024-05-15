@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import {addToDB, clearDB, getFromDB} from "../utils/IndexedDBManager";
 import {Antivirus} from "../models/Antivirus";
 
@@ -6,15 +6,37 @@ const api = axios.create({
     baseURL: 'http://localhost:8080',
 });
 
-export const getAntivirusList = () => {
-    return api.get('/antivirusList')
-        .catch(error => {
-            console.error('Error fetching data: ', error);
-            return getFromDB(); // Replace 1 with the actual key
-        });
+export const getAntivirusList = async () => {
+    const isServerOnline = await checkServerStatus();
+    const jwt = localStorage.getItem('jwt');
+    if (isServerOnline) {
+        return api.get('/antivirusList', {
+            headers: {
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+            .then(response => {
+                addToDB('antivirusList', response.data); // Store the data in IndexedDB
+                return response;
+            })
+            .catch(error => {
+                console.error('Error fetching data: ', error);
+                return getFromDB('antivirusList'); // Fetch from IndexedDB if API call fails
+            });
+    } else {
+        return getFromDB('antivirusList'); // Fetch from IndexedDB if server is offline
+    }
 };
 
-export const getAntivirusById = (id: number) => api.get(`/antivirusList/${id}`);
+export const getAntivirusById = async (id: number) => {
+    const isServerOnline = await checkServerStatus();
+    if (isServerOnline) {
+        return api.get(`/antivirusList/${id}`);
+    } else {
+        const antiviruses = await getFromDB(); // Fetch all antiviruses from IndexedDB
+        return antiviruses.find((antivirus: Antivirus) => antivirus.id === id); // Find the antivirus with the given id
+    }
+};
 
 export const addAntivirus = async (antivirus: {
     supportMultiPlatform: boolean;
@@ -24,19 +46,15 @@ export const addAntivirus = async (antivirus: {
     description: string;
     id: number
 }) => {
-    const isServerOnline = await checkServerStatus();
-    if (isServerOnline) {
-        return api.post('/antivirusList', JSON.stringify(antivirus), {
-            headers: {
-                'Content-Type': 'application/json'
-            }
+    return api.post('/antivirusList', JSON.stringify(antivirus), {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then((response) => {
+            console.log(response.data)
         });
-    } else {
-        addToDB(antivirus.id, antivirus);
-        return Promise.resolve(antivirus);
-    }
-};
-
+    };
 export const updateAntivirus = (antivirus: {
     supportMultiPlatform: boolean;
     releaseDate: Date;
@@ -58,7 +76,7 @@ export const syncDataWithServer = async () => {
     if (isServerOnline) {
         console.log('Syncing data with the server...');
         const antiviruses = await getFromDB();
-        const promises = antiviruses.map(antivirus => addAntivirus(antivirus));
+        const promises = antiviruses.map((antivirus: { supportMultiPlatform: boolean; releaseDate: Date; name: string; producer: string; description: string; id: number; }) => addAntivirus(antivirus));
         Promise.all(promises)
             .then(() => {
                 console.log('Data synced with the server!');
@@ -72,7 +90,14 @@ export const syncDataWithServer = async () => {
     }
 };
 export const checkServerStatus = () => {
-    return api.get('/antivirusList')
-        .then(() => true)
-        .catch(() => false);
+    console.log('Checking server status...');
+    try{
+        api.get('/ping');
+        console.log('Server is online(ping)!');
+        return true;
+    }
+    catch(error){
+        console.error("Server is offline(ping)!");
+        return false;
+    }
 };

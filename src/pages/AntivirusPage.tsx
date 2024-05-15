@@ -64,6 +64,9 @@ const AntivirusPage: React.FC = () => {
                 const receivedAntivirus = JSON.parse(message.body);
                 setAntivirusList((prevList) => [...prevList, receivedAntivirus]);
             })
+        }, (error : any) => {
+            console.error('Error establishing WebSocket connection: ', error);
+            // Handle the error (e.g., display an error message, retry the connection, etc.)
         })
 
         setStompClient(client);
@@ -75,11 +78,6 @@ const AntivirusPage: React.FC = () => {
         }
     }, [])
 
-    const sendMessage = (message: string) => {
-        if (stompClient) {
-            stompClient.send("/app/broadcast", {}, JSON.stringify(message));
-        }
-    };
 
     const handleItemsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setItemsPerPage(Number(event.target.value));

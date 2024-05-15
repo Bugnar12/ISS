@@ -22,9 +22,9 @@ const AddAntivirusForm: React.FC<Props>= ({onSubmit}) => {
             alert('Please fill out all fields');
             return;
         }
+
         const newId = Date.now();
         const newAntivirus = new Antivirus(newId, name, producer, description, supportMultiPlatform, new Date(releaseDate));
-        console.log(newAntivirus);
 
         const antivirusPlainObject = {
             id: newId,
@@ -35,13 +35,28 @@ const AddAntivirusForm: React.FC<Props>= ({onSubmit}) => {
             releaseDate: new Date(releaseDate)
         }
 
-        addAntivirus(antivirusPlainObject)
-            .then(antivirus => {
-                onSubmit(newAntivirus);
-            })
-            .catch(error => {
-                console.error('Error adding antivirus: ', error);
-            });
+        let antiviruses: typeof antivirusPlainObject[] = [];
+        const offlineAntiviruses = localStorage.getItem('offlineAntiviruses');
+        if (offlineAntiviruses) {
+            antiviruses = JSON.parse(offlineAntiviruses);
+        }
+
+        if (navigator.onLine) {
+            // If the user is online, make the API request
+            addAntivirus(antivirusPlainObject)
+                .then(() => {
+                    onSubmit(newAntivirus);
+                })
+                .catch(error => {
+                    console.error('Error adding antivirus: ', error);
+                });
+        } else {
+            console.log('intru aici');
+            console.log(antivirusPlainObject)
+            // If the user is offline, store the data in localStorage
+            antiviruses.push(antivirusPlainObject);
+            localStorage.setItem('offlineAntiviruses', JSON.stringify(antiviruses));
+        }
     };
 
     return(
