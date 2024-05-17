@@ -1,0 +1,50 @@
+@import 'https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css';
+
+.login-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.login-field label {
+    flex-grow: 1;
+}
+
+.login-field i {
+    margin-left: 10px;
+}
+
+.login-page-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.login-field input {
+     padding: 10px;
+     font-size: 1.2em;
+     margin-bottom: 15px;
+     width: 100%;
+ }
+
+.login-page-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-title {
+    font-size: 3em; /* Increase the font size */
+    margin-bottom: 30px; /* Add more space below the title */
+    text-align: center; /* Center the title */
+    color: #4a4a4a; /* Change the color of the title */
+    font-family: 'Arial', sans-serif; /* Change the font family */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a text shadow for a 3D effect */
+}
+
+.login-field input::placeholder {
+    color: #aaa; /* Light grey color */
+    opacity: 0.7; /* Half transparent */
+}

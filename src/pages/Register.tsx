@@ -1,6 +1,8 @@
+// src/pages/Register.tsx
 import React, { useState } from 'react';
 import { registerUser } from '../services/UserService';
 import { User } from '../models/User';
+import '../styling/LoginStyle.css'; // Import LoginStyle.css
 
 const Register: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -20,21 +22,24 @@ const Register: React.FC = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Username:
-                <input type="text" value={username} onChange={e => setUsername(e.target.value)} required />
-            </label>
-            <label>
-                Password:
-                <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
-            </label>
-            <label>
-                Email:
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
-            </label>
-            <input type="submit" value="Register" />
-        </form>
+        <div className='login-page-layout'>
+            <h1 className='login-title'>Register</h1>
+            <form onSubmit={handleSubmit}>
+                <div className='login-field'>
+                    <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Username" required />
+                    <i className='bx bx-user'></i>
+                </div>
+                <div className='login-field'>
+                    <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" required />
+                    <i className='bx bx-lock-alt'></i>
+                </div>
+                <div className='login-field'>
+                    <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" required />
+                    <i className='bx bx-envelope'></i>
+                </div>
+                <input type="submit" value="Register" />
+            </form>
+        </div>
     );
 };
 

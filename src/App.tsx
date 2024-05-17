@@ -13,16 +13,18 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 const App: React.FC = () => {
-    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+    /*const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
     if(!isLoggedIn){
         return(
-            <div>
-                <Login onLogin={() => setIsLoggedIn(true)} />
-                <Register/>
-            </div>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Login onLogin={() => setIsLoggedIn(true)} />} />
+                    <Route path="/register" element={<Register />} />
+                </Routes>
+            </Router>
         )
-    }
+    }*/
     return (
         <Router>
             <div className="App">
@@ -33,7 +35,7 @@ const App: React.FC = () => {
                         <img src={antivirus} alt="antivirus"></img>
                     </div>
                     <Routes>
-                        <Route path="/" element={
+                        <Route path="/home" element={
                             <>
                                 <div className="button-list">
                                     <AntivirusPage/>
@@ -44,7 +46,7 @@ const App: React.FC = () => {
                             <>
                                 <AddAntivirusPage/>
                                 <div>
-                                    <Link to="/" className="styled-button">Master-Detail</Link>
+                                    <Link to="/home" className="styled-button">Master-Detail</Link>
                                 </div>
                             </>
                         } />
@@ -52,7 +54,7 @@ const App: React.FC = () => {
                             <>
                                 <UpdateAntivirusPage/>
                                 <div>
-                                    <Link to="/" className="styled-button">Master-Detail</Link>
+                                    <Link to="/home" className="styled-button">Master-Detail</Link>
                                 </div>
                             </>
                         } />

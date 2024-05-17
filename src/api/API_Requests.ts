@@ -6,7 +6,7 @@ const api = axios.create({
     baseURL: 'http://localhost:8080',
 });
 
-export const getAntivirusList = async () => {
+/*export const getAntivirusList = async () => {
     const isServerOnline = await checkServerStatus();
     const jwt = localStorage.getItem('jwt');
     if (isServerOnline) {
@@ -25,6 +25,19 @@ export const getAntivirusList = async () => {
             });
     } else {
         return getFromDB('antivirusList'); // Fetch from IndexedDB if server is offline
+    }
+};*/
+
+export const getAntivirusList = async () => {
+    try {
+        const response = await axios.get('http://localhost:8080/antivirusList');
+        return response.data;
+    } catch (error) {
+        if (!error.response) {
+            console.error('Network error: ', error);
+            return [];
+        }
+        throw error;
     }
 };
 

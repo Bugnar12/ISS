@@ -1,3 +1,4 @@
+// src/services/UserService.ts
 import axios from "axios";
 import {User} from "../models/User";
 
@@ -17,6 +18,10 @@ export const loginUser = async (user: User) => {
             return response;
         })
         .catch((error) => {
+            if (!error.response) {
+                // network error
+                throw new Error('Network Error');
+            }
             console.error('Error logging in: ', error);
             throw error;
         });
@@ -33,6 +38,10 @@ export const registerUser = async (user: User) => {
             return response;
         })
         .catch((error) => {
+            if (!error.response) {
+                // network error
+                throw new Error('Network Error');
+            }
             console.error('Error registering: ', error);
             throw error;
         });

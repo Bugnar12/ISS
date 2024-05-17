@@ -19,7 +19,6 @@ const AntivirusPage: React.FC = () => {
 
     const [selectedAntivirus, setObject] = useState<Antivirus | null>(null);
     const [antivirusList, setAntivirusList] = useState<Antivirus[]>([]);
-
     const [isAscending, setIsAscending] = useState<boolean>(true);
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -32,6 +31,8 @@ const AntivirusPage: React.FC = () => {
     const [stompClient, setStompClient] = useState<CompatClient | null>(null);
     const [isOnline, setIsOnline] = useState(navigator.onLine);
     const [wasOnline, setWasOnline] = useState(true);
+
+    const [serverOffline, setServerOffline] = useState(false);
 
     useEffect(() => {
         const updateOnlineStatus = async () => {
@@ -109,13 +110,13 @@ const AntivirusPage: React.FC = () => {
                     setAntivirusList(response.data);
                     setServerErrorModal(false);
                 } else {
-
                     setAntivirusList(response);
                 }
             })
             .catch((error) => {
                 console.error('Error fetching data: ', error);
                 setServerErrorModal(true); //we open a modal to address the unsuccessful fetching of data
+                setServerOffline(true);
             })
     }
 
