@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import AntivirusPage from "./pages/AntivirusPage";
 import AddAntivirusPage from "./pages/AddAntivirusPage";
 import antivirus from './antivirus.png';
@@ -13,18 +13,18 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 const App: React.FC = () => {
-    /*const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-    if(!isLoggedIn){
-        return(
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Login onLogin={() => setIsLoggedIn(true)} />} />
-                    <Route path="/register" element={<Register />} />
-                </Routes>
-            </Router>
-        )
-    }*/
+    useEffect(() => {
+        const loggedIn = localStorage.getItem('isLoggedIn');
+        setIsLoggedIn(loggedIn === 'true');
+    }, []);
+
+    //save the logged in state to local storage whenever it changes
+    useEffect(() => {
+        localStorage.setItem('isLoggedIn', String(isLoggedIn));
+    }, [isLoggedIn]);
+
     return (
         <Router>
             <div className="App">
@@ -35,6 +35,15 @@ const App: React.FC = () => {
                         <img src={antivirus} alt="antivirus"></img>
                     </div>
                     <Routes>
+                        <Route path="/" element={<Login onLogin={() => setIsLoggedIn(true)} />} />
+                        <Route path="/register" element={<Register />} />
+                        {isLoggedIn ? (
+                            // Routes for logged in users
+                            <Route path="/home" element={<AntivirusPage />} />
+                            // ... other routes
+                        ) : (
+                            <Route path="/register" element={<Register />} />
+                        )}
                         <Route path="/home" element={
                             <>
                                 <div className="button-list">

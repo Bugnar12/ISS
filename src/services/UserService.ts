@@ -7,7 +7,7 @@ const api = axios.create({
 });
 
 export const loginUser = async (user: User) => {
-    return api.post('/user/login', JSON.stringify(user), {
+    return api.post('/login', JSON.stringify(user), {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -28,7 +28,7 @@ export const loginUser = async (user: User) => {
 };
 
 export const registerUser = async (user: User) => {
-    return api.post('/user/register', JSON.stringify(user), {
+    return api.post('/register', JSON.stringify(user), {
         headers: {
             'Content-Type': 'application/json'
         }

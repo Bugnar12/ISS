@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import { registerUser } from '../services/UserService';
 import { User } from '../models/User';
 import '../styling/LoginStyle.css'; // Import LoginStyle.css
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Register: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -15,6 +17,7 @@ const Register: React.FC = () => {
         registerUser(user)
             .then(response => {
                 console.log('Registered successfully');
+                navigate('/'); // Navigate to the Login page
             })
             .catch(error => {
                 console.error('Error registering: ', error);

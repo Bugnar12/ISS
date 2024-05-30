@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { loginUser } from '../services/UserService';
 import { User } from '../models/User';
 import '../styling/LoginStyle.css';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate, Link } from 'react-router-dom'; // Import Link
 
 interface LoginProps {
     onLogin: () => void;
@@ -21,7 +21,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
             .then(response => {
                 console.log('Logged in successfully');
                 onLogin();
-                navigate('/home'); // Navigate to the main page
+                navigate('/home');
             })
             .catch(error => {
                 console.error('Error logging in: ', error);
@@ -42,6 +42,9 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                 </div>
                 <input type="submit" value="Login" />
             </form>
+            <div>
+                Don't have an account? <Link to="/register">Register now.</Link>
+            </div>
         </div>
     );
 };

@@ -16,9 +16,11 @@
 
 .login-page-layout {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin-top: -200px; /* Adjust this value to move the box higher or lower */
 }
 .login-field input {
      padding: 10px;
